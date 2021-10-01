@@ -1,3 +1,3 @@
 # Ansible-Project
 
-To install a website on an Ec2 instance 
+To install my cloudresume-challenge website on an Ec2 instance 
