@@ -5,19 +5,19 @@
   become: yes
   become_user: root
 
-  task:
-    - name: update Ec2 instance
+  tasks:
+    - name: update ec2 instance
       yum:
         name: "*"
         state: latest
         update_cache: yes
-    
-    - name: install apacher server
+
+    - name: install apache server
       yum:
         name: httpd
         state: latest
 
-    - name: copy webfiles from s3 bucket in the html dir
+    - name: copy the web files from s3 bucket in the html dir
       command: aws s3 sync s3://personalcloudresume /var/www/html
 
     - name: start apache server
