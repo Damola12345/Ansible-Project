@@ -1,0 +1,27 @@
+---
+
+- name: deploy cloudresume website
+  hosts: all
+  become: yes
+  become_user: root
+
+  task:
+    - name: update Ec2 instance
+      yum:
+        name: "*"
+        state: latest
+        update_cache: yes
+    
+    - name: install apacher server
+      yum:
+        name: httpd
+        state: latest
+
+    - name: copy webfiles from s3 bucket in the html dir
+      command: aws s3 sync s3://personalcloudresume /var/www/html
+
+    - name: start apache server
+      service:
+        enabled: yes
+        name: httpd
+        state: started
